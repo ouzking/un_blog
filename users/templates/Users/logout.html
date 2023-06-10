@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content  %}
+    <div class="row">
+        <div class="col-12 col-md-4 mx-auto mt-5">
+            <h2>Vous avez été déconnecté</h2>
+            <div class="border-tab pt-3">
+                <smail>
+                    <a bref='{% url 'login' %}' type="submit">Reconnectez-vous</a>
+                </smail>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-12 mx-md-auto mx-3 mt-5 mb-5">
+            <h1 class='fw-bolder'>Après Selection</h1>
+            <h5 class='text-muted'>Jetez un oeil à la publication en vedette</h5>
+        </div>
+    </div>
+
+    {% for object in object_list %}
+    <div class="col-md-6 col-12 mx-md-auto mx-3 mt-5 mb-5">
+        <h3 class='fw-bold'>{{ object.title }}</h3>
+        <p class='text-muted'>{{ object.date }}</p>
+        <p class='text-muted'>Presenter par {{ object.author.username }}</p>
+        {% if object.likes.count == 1 %}
+            <p class='text-muted'>{{ object.likes.count }} person likes this post</p>
+        {% else %}
+            <p class='text-muted'>{{ object.likes.count }} Personne qui aime ce blog</p>
+        {% endif %}
+        
+        <a href="{% url 'detail_article' object.id %}">En savoir plus</a>
+        </div>
+    </div>
+    {% endfor %}
+    <nav>
+        <ul class="pagination">    
+            <div class="mx-auto d-flex flex-row mt-5">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">&laquo; Premier
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ pages_obj.previous_page_number}}">Précédent</a>
+                    </li>
+                {% endif %}
+                <li class="page-item">
+                    <a class="page-link" href="#">Page {{ page_obj.number}} de {{ pages_obj.paginator.num_pages }}.</a>
+                </li>
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{page_obj.next_page_number}}">Suivant</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{page_obj.paginator.num_pages}}">Dernier &raquo;</a>
+                    </li>
+                {% endif %}
+            </div>
+        </ul>   
+    </nav>
+{% endblock content %}
